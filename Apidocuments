@@ -1,0 +1,85 @@
+===========API Document ==============
+---------------get all Categories-------------------------
+GET /v1/categories HTTP/1.1
+Host: localhost:9000
+Cache-Control: no-cache
+Postman-Token: 66046405-26a3-3628-e74f-5d29c881f8c5
+
+---------------get Categories-------------------------
+GET /v1/categories/1 HTTP/1.1
+Host: localhost:9000
+Cache-Control: no-cache
+Postman-Token: 9f0ec089-3c4e-7af9-f450-22a63490a8b7
+
+---------------update Categories-------------------------
+POST /v1/categories/1 HTTP/1.1
+Host: localhost:9000
+Content-Type: application/json
+Cache-Control: no-cache
+Postman-Token: 7090e7e5-3d57-87e8-c584-b6a5b88d75d1
+
+{ "id": "1",
+    "name": "phone"
+}
+----------------------------------------
+---------------get all Subcategories-------------------------
+GET /v1/subcategories HTTP/1.1
+Host: localhost:9000
+Cache-Control: no-cache
+Postman-Token: 66046405-26a3-3628-e74f-5d29c881f8c5
+
+---------------get Subcategories-------------------------
+GET /v1/subcategories/1 HTTP/1.1
+Host: localhost:9000
+Cache-Control: no-cache
+Postman-Token: 9f0ec089-3c4e-7af9-f450-22a63490a8b7
+
+---------------update Subcategories-------------------------
+POST /v1/subcategories/1 HTTP/1.1
+Host: localhost:9000
+Content-Type: application/json
+Cache-Control: no-cache
+Postman-Token: 7090e7e5-3d57-87e8-c584-b6a5b88d75d1
+
+{
+    "id": 1,
+    "idCategory": 1,
+    "name": "Nokia 8800 2"
+}
+----------------------------------------
+---------------get all product-------------------------
+GET /v1/product HTTP/1.1
+Host: localhost:9000
+Cache-Control: no-cache
+Postman-Token: 66046405-26a3-3628-e74f-5d29c881f8c5
+
+---------------get product-------------------------
+GET /v1/product/1 HTTP/1.1
+Host: localhost:9000
+Cache-Control: no-cache
+Postman-Token: 9f0ec089-3c4e-7af9-f450-22a63490a8b7
+
+---------------update product-------------------------
+POST /v1/product/1 HTTP/1.1
+Host: localhost:9000
+Content-Type: application/json
+Cache-Control: no-cache
+Postman-Token: 7090e7e5-3d57-87e8-c584-b6a5b88d75d1
+
+{
+    "id": 1,
+    "categoryId": 1,
+    "subcategoryId": 1,
+    "productDisplayName": "Nokia 8800 111",
+    "price": 200,
+    "productShortDesc": "Nokia 8800111",
+    "productLongDesc": "Nokia 880011",
+    "isActive": true,
+    "thumbnailImage": "Nokia 880011",
+    "smallImage": "Nokia 880011",
+    "createDate": "2012-12-12",
+    "lastUpdateDate": "2012-12-12",
+    "manufacturer": "Phan lan1",
+    "weight": 2
+}
+----------------------------------------
