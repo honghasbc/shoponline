@@ -10,6 +10,7 @@ sealed trait CategoryDataStorage {
   def getCategories(): Future[Seq[CategoryDta]]
   def getCategory(id: Int): Future[Option[CategoryDta]]
   def saveCategory(category: CategoryDta): Future[CategoryDta]
+  def deleteCategory(id: Int): Future[Option[Int]]
 
 }
 
@@ -27,6 +28,13 @@ class JdbcCategoryStorage(
   def saveCategory(categoryDta: CategoryDta): Future[CategoryDta] =
     db.run(categories.insertOrUpdate(categoryDta)).map(_ => categoryDta)
 
+  def deleteCategory(id: Int): Future[Option[Int]] = {
+    val q = categories.filter(_.id === id)
+    val action = q.delete
+    val affectedRowsCount: Future[Int] = db.run(action)
+    val sql = action.statements.head
+    Future(Option(id))
+  }
 }
 
 class InMemoryCategoryStorage extends CategoryDataStorage {
@@ -45,5 +53,6 @@ class InMemoryCategoryStorage extends CategoryDataStorage {
       state = state :+ categoryDta
       categoryDta
     }
-
+  override def deleteCategory(id: Int): Future[Option[Int]] =
+    Future.successful(state.find(_.id == id).map(_ => id ))
 }

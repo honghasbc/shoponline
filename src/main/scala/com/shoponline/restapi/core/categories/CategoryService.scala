@@ -23,4 +23,7 @@ class CategoryService(categoryStorage: CategoryDataStorage
       .mapT(categoryUpdate.merge)
       .flatMapTOuter(categoryStorage.saveCategory)
 
+  def deleteCategory(id: String): Future[Option[Int]] =
+    categoryStorage.deleteCategory(Integer.parseInt(id))
+
 }

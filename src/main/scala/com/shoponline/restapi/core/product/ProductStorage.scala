@@ -10,6 +10,7 @@ sealed trait ProductStorage {
   def getProducts(): Future[Seq[ProductDta]]
   def getProduct(id: Int): Future[Option[ProductDta]]
   def saveProduct(product: ProductDta): Future[ProductDta]
+  def deleteProduct(id: Int): Future[Option[Int]]
 
 }
 
@@ -26,6 +27,14 @@ class JdbcProductStorage(
 
   def saveProduct(productDta: ProductDta): Future[ProductDta] =
     db.run(product.insertOrUpdate(productDta)).map(_ => productDta)
+
+  def deleteProduct(id: Int): Future[Option[Int]] = {
+    val q = product.filter(_.id === id)
+    val action = q.delete
+    val affectedRowsCount: Future[Int] = db.run(action)
+    val sql = action.statements.head
+    Future(Option(id))
+  }
 
 }
 
@@ -45,5 +54,8 @@ class InMemoryProductStorage extends ProductStorage {
       state = state :+ product
       product
     }
+
+  override def deleteProduct(id: Int): Future[Option[Int]] =
+    Future.successful(state.find(_.id == id).map(_ => id ))
 
 }

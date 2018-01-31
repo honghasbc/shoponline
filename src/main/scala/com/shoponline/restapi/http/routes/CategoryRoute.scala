@@ -58,6 +58,9 @@ class CategoryRoute(
                     BadRequest -> None.asJson
                 })
               }
+            }~
+            delete {
+              complete(deleteCategory(id))
             }
         }
       }

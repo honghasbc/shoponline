@@ -42,6 +42,9 @@ class ProductRoute(
                     BadRequest -> None.asJson
                 })
               }
+            }~
+            delete {
+              complete(deleteProduct(id))
             }
         }
       }

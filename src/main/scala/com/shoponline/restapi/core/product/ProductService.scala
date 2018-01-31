@@ -24,4 +24,7 @@ class ProductService(productStorage: ProductStorage
       .mapT(productUpdate.merge)
       .flatMapTOuter(productStorage.saveProduct)
 
+  def deleteProduct(id: String): Future[Option[Int]] =
+    productStorage.deleteProduct(Integer.parseInt(id))
+
 }
