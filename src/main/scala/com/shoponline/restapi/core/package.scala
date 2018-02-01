@@ -32,6 +32,13 @@ package object core {
 //    require(lastUpdateDate.nonEmpty, "lastUpdateDate.empty")
     require(manufacturer.nonEmpty, "manufacturer.empty")
   }
+
+  final case class ProductCategoryDta(id: Int, categoryId: Int, subcategoryId: Int,
+                              productDisplayName: String, categoryName:String, subcategoryName:String, price: Double, productShortDesc: String,
+                              productLongDesc: String, isActive: Boolean, thumbnailImage: String,
+                              smallImage: String, createDate: String, lastUpdateDate: String,
+                              manufacturer: String, weight: Float) {
+  }
   final case class ProductUpdate(categoryId :Option[Int] = None ,subcategoryId :Option[Int] = None , productDisplayName: Option[String] = None, price: Option[Double] = None,
                                  productShortDesc: Option[String] = None, productLongDesc: Option[String] = None,
                                  isActive: Option[Boolean] = None, thumbnailImage: Option[String] = None, smallImage: Option[String] = None,

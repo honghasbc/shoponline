@@ -26,9 +26,9 @@ class ProductRoute(
       pathPrefix(Segment) { id =>
         pathEndOrSingleSlash {
           get {
-            complete(getProduct(id).map {
-              case Some(productDta) =>
-                OK -> productDta.asJson
+            complete(getProductCategory(id).map {
+              case Some(productCategoryDta) =>
+                OK -> productCategoryDta.asJson
               case None =>
                 BadRequest -> None.asJson
             })

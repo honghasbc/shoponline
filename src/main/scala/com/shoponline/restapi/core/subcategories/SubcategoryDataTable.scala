@@ -4,7 +4,7 @@ import com.shoponline.restapi.core.SubcategoryDta
 import com.shoponline.restapi.core.categories.CategoryDataTable
 import com.shoponline.restapi.utils.db.DatabaseConnector
 
-private[subcategories] trait SubcategoryDataTable extends CategoryDataTable {
+trait SubcategoryDataTable extends CategoryDataTable {
 
   protected val databaseConnector: DatabaseConnector
   import databaseConnector.profile.api._
@@ -20,6 +20,6 @@ private[subcategories] trait SubcategoryDataTable extends CategoryDataTable {
     def catagorier = foreignKey("Subcategories_fk0", idCategory, categories)(_.id)
   }
 
-  protected val subcategories = TableQuery[Subcategory]
+  val subcategories = TableQuery[Subcategory]
 
 }

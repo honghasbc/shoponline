@@ -1,12 +1,11 @@
 package com.shoponline.restapi.core.product
 
-import java.util.Date
-
 import com.shoponline.restapi.core.ProductDta
 import com.shoponline.restapi.utils.db.DatabaseConnector
 import com.shoponline.restapi.core.categories.CategoryDataTable
+import com.shoponline.restapi.core.subcategories.SubcategoryDataTable
 
-private[product] trait ProductTable extends CategoryDataTable{
+private[product] trait ProductTable extends CategoryDataTable with SubcategoryDataTable{
 
   protected val databaseConnector: DatabaseConnector
   import databaseConnector.profile.api._
@@ -36,7 +35,7 @@ private[product] trait ProductTable extends CategoryDataTable{
 
     // A reified foreign key relation that can be navigated to create a join
     def categorier = foreignKey("Product_fk0", categoryId, categories)(_.id)
-//    def subcategorier = foreignKey("Product_fk1", subcategoryId, subcategories)(_.id)
+    def subcategorier = foreignKey("Product_fk1", subcategoryId, subcategories)(_.id)
   }
 
   protected val product = TableQuery[Product]

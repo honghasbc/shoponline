@@ -1,6 +1,6 @@
 package com.shoponline.restapi.core.product
 
-import com.shoponline.restapi.core.{ProductDta, ProductUpdate}
+import com.shoponline.restapi.core.{ProductDta, ProductUpdate, ProductCategoryDta}
 import com.shoponline.restapi.utils.MonadTransformers._
 import com.shoponline.restapi.utils.helps.Converters
 
@@ -9,7 +9,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class ProductService(productStorage: ProductStorage
 )(implicit executionContext: ExecutionContext) {
 
-  def getProducts(): Future[Seq[ProductDta]] =
+  def getProducts(): Future[Seq[ProductCategoryDta]] =
     productStorage.getProducts()
 
   def getProduct(id: String): Future[Option[ProductDta]] =
@@ -26,5 +26,8 @@ class ProductService(productStorage: ProductStorage
 
   def deleteProduct(id: String): Future[Option[Int]] =
     productStorage.deleteProduct(Integer.parseInt(id))
+
+  def getProductCategory(id: String): Future[Option[ProductCategoryDta]] =
+    productStorage.getProductCategory(Converters.stringToInt(id))
 
 }
