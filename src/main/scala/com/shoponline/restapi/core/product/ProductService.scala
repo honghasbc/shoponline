@@ -15,8 +15,9 @@ class ProductService(productStorage: ProductStorage
   def getProduct(id: String): Future[Option[ProductDta]] =
     productStorage.getProduct(Converters.stringToInt(id))
 
-  def createProduct(product: ProductDta): Future[ProductDta] =
+  def createProduct(product: ProductDta): Future[ProductDta] = {
     productStorage.saveProduct(product)
+  }
 
   def updateProduct(id: String, productUpdate: ProductUpdate): Future[Option[ProductDta]] =
     productStorage

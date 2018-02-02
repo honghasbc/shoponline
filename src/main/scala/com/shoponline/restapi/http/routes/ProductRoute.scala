@@ -47,6 +47,14 @@ class ProductRoute(
               complete(deleteProduct(id))
             }
         }
+      } ~
+      post {
+        entity(as[ProductDta]) { productDta =>
+          complete(createProduct(productDta).map {
+            case productDta =>
+              OK -> productDta.asJson
+          })
+        }
       }
   }
 

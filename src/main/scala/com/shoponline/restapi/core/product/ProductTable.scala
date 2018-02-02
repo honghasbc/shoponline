@@ -14,7 +14,7 @@ private[product] trait ProductTable extends CategoryDataTable with SubcategoryDa
 
 //    CONSTRAINT Product_pk PRIMARY KEY ("id")
 
-    def id = column[Int]("id", O.PrimaryKey)
+    def id = column[Int]("id", O.PrimaryKey ,O.AutoInc)
     def categoryId = column[Int]("category_id")
     def subcategoryId = column[Int]("subcategory_id")
     def productDisplayName = column[String]("product_display_name")
