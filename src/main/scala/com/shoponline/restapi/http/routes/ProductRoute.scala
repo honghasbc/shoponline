@@ -7,6 +7,7 @@ import com.shoponline.restapi.core.product.ProductService
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport
 import io.circe.generic.auto._
 import io.circe.syntax._
+import org.slf4j.LoggerFactory
 
 import scala.concurrent.ExecutionContext
 
@@ -17,6 +18,7 @@ class ProductRoute(
   import StatusCodes._
   import productService._
 
+  val logger = LoggerFactory.getLogger(classOf[ProductRoute])
   val route = pathPrefix("product") {
     pathEndOrSingleSlash {
       get {
@@ -26,6 +28,7 @@ class ProductRoute(
       pathPrefix(Segment) { id =>
         pathEndOrSingleSlash {
           get {
+            logger.info("--- GET Method ---")
             complete(getProductCategory(id).map {
               case Some(productCategoryDta) =>
                 OK -> productCategoryDta.asJson
@@ -35,6 +38,7 @@ class ProductRoute(
           } ~
             post {
               entity(as[ProductUpdate]) { productUpdate =>
+                logger.info("POST product update data :"+productUpdate)
                 complete(updateProduct(id, productUpdate).map {
                   case Some(productDta) =>
                     OK -> productDta.asJson
@@ -44,12 +48,14 @@ class ProductRoute(
               }
             }~
             delete {
+              logger.info("--- DELETE product id :"+ id)
               complete(deleteProduct(id))
             }
         }
       } ~
       post {
         entity(as[ProductDta]) { productDta =>
+          logger.info("POST product data :"+productDta)
           complete(createProduct(productDta).map {
             case productDta =>
               OK -> productDta.asJson
